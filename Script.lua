@@ -18,10 +18,10 @@ local function updateFeedback(message)
     end
 end
 
-Section:NewTextBox("Enter WalkSpeed (0 to 500)", "Change character WalkSpeed", function(text)
+Section:NewTextBox("WalkSpeed (0 - 500)", "Change character WalkSpeed", function(text)
     local value = tonumber(text)
     if value then
-        if value >= 0 and value <= 500 then
+        if value >= 0 and value <= 1000 then
             local player = game.Players.LocalPlayer
             if player then
                 if player.Character and player.Character:FindFirstChild("Humanoid") then
@@ -34,17 +34,17 @@ Section:NewTextBox("Enter WalkSpeed (0 to 500)", "Change character WalkSpeed", f
                 updateFeedback("Player not found.")
             end
         else
-            updateFeedback("Invalid number! Choose between 0 and 500.")
+            updateFeedback("Invalid number! Choose between 0 and 1000.")
         end
     else
         updateFeedback("Please enter a valid number.")
     end
 end)
 
-Section:NewTextBox("Enter JumpPower (0 to 300)", "Change character JumpPower", function(text)
+Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", function(text)
     local value = tonumber(text)
     if value then
-        if value >= 0 and value <= 300 then
+        if value >= 0 and value <= 1000 then
             local player = game.Players.LocalPlayer
             if player then
                 if player.Character and player.Character:FindFirstChild("Humanoid") then
