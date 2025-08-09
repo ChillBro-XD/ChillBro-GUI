@@ -4,60 +4,6 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 -- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
 
-local UserInputService = game:GetService("UserInputService")
-local GuiService = game:GetService("GuiService")
-
-local function makeDraggable(frame)
-    local dragging = false
-    local dragInput, inputPos, framePos
-
-    frame.AnchorPoint = Vector2.new(0, 0) -- garante referência de posição no canto superior esquerdo
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            inputPos = input.Position
-            framePos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    frame.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-            dragInput = input
-        end
-    end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
-            local delta = input.Position - inputPos
-
-            local newX = framePos.X.Offset + delta.X
-            local newY = framePos.Y.Offset + delta.Y
-
-            local screenSize = GuiService:GetScreenResolution()
-
-            newX = math.clamp(newX, 0, screenSize.X - frame.AbsoluteSize.X)
-            newY = math.clamp(newY, 0, screenSize.Y - frame.AbsoluteSize.Y)
-
-            frame.Position = UDim2.new(
-                0,
-                newX,
-                0,
-                newY
-            )
-        end
-    end)
-end
-
--- Depois de criar a janela:
-makeDraggable(Window.MainFrame)
-
 -- Create Tab
 local Tab = Window:NewTab("Scripts")
 
@@ -119,4 +65,4 @@ Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", functio
     end
 end)
 
-feedbackLabel = Section:NewLabel("Status: Waiting for input...")
+feedbackLabel = Section:NewLabel("Status: ⏱︎ Waiting for input...")
