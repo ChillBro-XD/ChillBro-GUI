@@ -4,15 +4,6 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 -- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
 
-local mainFrame = Window.MainFrame
-
-if mainFrame then
-    mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-else
-    warn("MainFrame não encontrado no objeto Window.")
-end
-
 -- Create Tab
 local Tab = Window:NewTab("Scripts")
 
