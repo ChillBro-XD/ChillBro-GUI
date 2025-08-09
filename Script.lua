@@ -4,6 +4,13 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 -- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
 
+local GuiService = game:GetService("GuiService")
+local screenSize = GuiService:GetScreenResolution()
+local frame = Window.MainFrame
+
+frame.AnchorPoint = Vector2.new(0.5, 0.5) -- centraliza o ponto de ancoragem no meio do frame
+frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- posiciona no centro da tela
+
 -- Create Tab
 local Tab = Window:NewTab("Scripts")
 
