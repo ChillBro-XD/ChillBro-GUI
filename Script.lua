@@ -5,14 +5,31 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
 
 -- Centralizar a janela na tela
-wait(1)  -- aguarda a janela ser criada
+wait(1)
+local parentGui = game.CoreGui:FindFirstChild("Comando's GUI")
+if parentGui then
+    print("Filhos de Comando's GUI:")
+    for i,v in pairs(parentGui:GetChildren()) do
+        print(i, v.Name, v.ClassName)
+    end
 
-local mainFrame = game.CoreGui:FindFirstChild("Comando's GUI")
-if mainFrame then
-    mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    -- supondo que o frame principal é o primeiro filho Frame
+    local mainFrame = nil
+    for _, child in pairs(parentGui:GetChildren()) do
+        if child:IsA("Frame") then
+            mainFrame = child
+            break
+        end
+    end
+
+    if mainFrame then
+        mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+        mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    else
+        warn("Frame principal não encontrado dentro de 'Comando's GUI'.")
+    end
 else
-    warn("Janela principal não encontrada para centralizar.")
+    warn("'Comando's GUI' não encontrado no CoreGui.")
 end
 
 -- Create Tab
