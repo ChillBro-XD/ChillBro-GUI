@@ -1,13 +1,7 @@
--- Load Kavo UI Library
+-- Já tem isso antes
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRussell/Kavo-UI-Library/main/Movable.source.lua"))()
-
--- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
-
--- Create Tab
 local Tab = Window:NewTab("Scripts")
-
--- Create Section
 local Section = Tab:NewSection("Humanoid Controls")
 
 local feedbackLabel
@@ -18,20 +12,24 @@ local function updateFeedback(message)
     end
 end
 
+local function getHumanoid()
+    local player = game.Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+        return player.Character.Humanoid
+    end
+    return nil
+end
+
 Section:NewTextBox("WalkSpeed (0 - 1000)", "Change character WalkSpeed", function(text)
     local value = tonumber(text)
     if value then
         if value >= 0 and value <= 1000 then
-            local player = game.Players.LocalPlayer
-            if player then
-                if player.Character and player.Character:FindFirstChild("Humanoid") then
-                    player.Character.Humanoid.WalkSpeed = value
-                    updateFeedback("✔️ WalkSpeed set to " .. value)
-                else
-                    updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
-                end
+            local humanoid = getHumanoid()
+            if humanoid then
+                humanoid.WalkSpeed = value
+                updateFeedback("✔️ WalkSpeed set to " .. value)
             else
-                updateFeedback("⁉ Player not found.")
+                updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
             end
         else
             updateFeedback("✖ Invalid number! Choose between 0 and 1000.")
@@ -45,20 +43,96 @@ Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", functio
     local value = tonumber(text)
     if value then
         if value >= 0 and value <= 1000 then
-            local player = game.Players.LocalPlayer
-            if player then
-                if player.Character and player.Character:FindFirstChild("Humanoid") then
-                    player.Character.Humanoid.UseJumpPower = true
-                    player.Character.Humanoid.JumpPower = value
-                    updateFeedback("✔️ JumpPower set to " .. value)
-                else
-                    updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
-                end
+            local humanoid = getHumanoid()
+            if humanoid then
+                humanoid.UseJumpPower = true
+                humanoid.JumpPower = value
+                updateFeedback("✔️ JumpPower set to " .. value)
             else
-                updateFeedback("⁉ Player not found.")
+                updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
             end
         else
             updateFeedback("✖ Invalid number! Choose between 0 and 1000.")
+        end
+    else
+        updateFeedback("✖ Please enter a valid number.")
+    end
+end)
+
+-- NOVOS COMANDOS
+
+Section:NewTextBox("Health (1 - MaxHealth)", "Change current Health", function(text)
+    local value = tonumber(text)
+    local humanoid = getHumanoid()
+    if humanoid then
+        if value and value >= 1 and value <= humanoid.MaxHealth then
+            humanoid.Health = value
+            updateFeedback("✔️ Health set to " .. value)
+        else
+            updateFeedback("✖ Invalid number! Choose between 1 and " .. humanoid.MaxHealth)
+        end
+    else
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+    end
+end)
+
+Section:NewTextBox("MaxHealth (1 - 1000)", "Change MaxHealth", function(text)
+    local value = tonumber(text)
+    local humanoid = getHumanoid()
+    if humanoid then
+        if value and value >= 1 and value <= 1000 then
+            humanoid.MaxHealth = value
+            -- opcional: se a vida atual for maior que MaxHealth, ajusta
+            if humanoid.Health > value then
+                humanoid.Health = value
+            end
+            updateFeedback("✔️ MaxHealth set to " .. value)
+        else
+            updateFeedback("✖ Invalid number! Choose between 1 and 1000.")
+        end
+    else
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+    end
+end)
+
+Section:NewTextBox("HipHeight (0 - 10)", "Change HipHeight", function(text)
+    local value = tonumber(text)
+    local humanoid = getHumanoid()
+    if humanoid then
+        if value and value >= 0 and value <= 10 then
+            humanoid.HipHeight = value
+            updateFeedback("✔️ HipHeight set to " .. value)
+        else
+            updateFeedback("✖ Invalid number! Choose between 0 and 10.")
+        end
+    else
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+    end
+end)
+
+Section:NewTextBox("JumpHeight (0 - 100)", "Change JumpHeight", function(text)
+    local value = tonumber(text)
+    local humanoid = getHumanoid()
+    if humanoid then
+        if value and value >= 0 and value <= 100 then
+            humanoid.JumpHeight = value
+            updateFeedback("✔️ JumpHeight set to " .. value)
+        else
+            updateFeedback("✖ Invalid number! Choose between 0 and 100.")
+        end
+    else
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+    end
+end)
+
+Section:NewTextBox("Gravity (0 - 500)", "Change workspace gravity (fun to mess with)", function(text)
+    local value = tonumber(text)
+    if value then
+        if value >= 0 and value <= 500 then
+            workspace.Gravity = value
+            updateFeedback("✔️ Gravity set to " .. value)
+        else
+            updateFeedback("✖ Invalid number! Choose between 0 and 500.")
         end
     else
         updateFeedback("✖ Please enter a valid number.")
