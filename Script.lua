@@ -10,27 +10,28 @@ local Tab = Window:NewTab("Scripts")
 -- Create Section
 local Section = Tab:NewSection("Humanoid Controls")
 
--- Declare a variável para feedbackLabel (sem valor ainda)
 local feedbackLabel
 
--- Função para atualizar o label (usa a variável que será definida depois)
 local function updateFeedback(message)
     if feedbackLabel then
         feedbackLabel:UpdateLabel("Status: " .. message)
     end
 end
 
--- Caixa de texto para mudar WalkSpeed
 Section:NewTextBox("Enter WalkSpeed (0 to 500)", "Change character WalkSpeed", function(text)
     local value = tonumber(text)
     if value then
         if value >= 0 and value <= 500 then
             local player = game.Players.LocalPlayer
-            if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-                player.Character.Humanoid.WalkSpeed = value
-                updateFeedback("WalkSpeed set to " .. value)
+            if player then
+                if player.Character and player.Character:FindFirstChild("Humanoid") then
+                    player.Character.Humanoid.WalkSpeed = value
+                    updateFeedback("WalkSpeed set to " .. value)
+                else
+                    updateFeedback("Character or Humanoid not found. Please respawn or rejoin.")
+                end
             else
-                updateFeedback("Humanoid not found.")
+                updateFeedback("Player not found.")
             end
         else
             updateFeedback("Invalid number! Choose between 0 and 500.")
@@ -40,18 +41,21 @@ Section:NewTextBox("Enter WalkSpeed (0 to 500)", "Change character WalkSpeed", f
     end
 end)
 
--- Caixa de texto para mudar JumpPower
 Section:NewTextBox("Enter JumpPower (0 to 300)", "Change character JumpPower", function(text)
     local value = tonumber(text)
     if value then
         if value >= 0 and value <= 300 then
             local player = game.Players.LocalPlayer
-            if player and player.Character and player.Character:FindFirstChild("Humanoid") then
-                player.Character.Humanoid.UseJumpPower = true
-                player.Character.Humanoid.JumpPower = value
-                updateFeedback("JumpPower set to " .. value)
+            if player then
+                if player.Character and player.Character:FindFirstChild("Humanoid") then
+                    player.Character.Humanoid.UseJumpPower = true
+                    player.Character.Humanoid.JumpPower = value
+                    updateFeedback("JumpPower set to " .. value)
+                else
+                    updateFeedback("Character or Humanoid not found. Please respawn or rejoin.")
+                end
             else
-                updateFeedback("Humanoid not found.")
+                updateFeedback("Player not found.")
             end
         else
             updateFeedback("Invalid number! Choose between 0 and 300.")
@@ -61,5 +65,4 @@ Section:NewTextBox("Enter JumpPower (0 to 300)", "Change character JumpPower", f
     end
 end)
 
--- Agora, CRIE o feedbackLabel DEPOIS das caixas de texto
 feedbackLabel = Section:NewLabel("Status: Waiting for input...")
