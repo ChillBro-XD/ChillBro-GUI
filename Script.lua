@@ -4,12 +4,16 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 -- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
 
-local GuiService = game:GetService("GuiService")
-local screenSize = GuiService:GetScreenResolution()
-local frame = Window.MainFrame
+-- Centralizar a janela na tela
+wait(1)  -- aguarda a janela ser criada
 
-frame.AnchorPoint = Vector2.new(0.5, 0.5) -- centraliza o ponto de ancoragem no meio do frame
-frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- posiciona no centro da tela
+local mainFrame = game.CoreGui:FindFirstChild("Comando's GUI")
+if mainFrame then
+    mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+else
+    warn("Janela principal não encontrada para centralizar.")
+end
 
 -- Create Tab
 local Tab = Window:NewTab("Scripts")
