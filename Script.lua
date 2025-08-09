@@ -106,4 +106,4 @@ Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", functio
     end
 end)
 
-feedbackLabel = Section:NewLabel("Status: ⏱︎ Waiting for input...")
+feedbackLabel = Section:NewLabel("Status: Waiting for input...")
