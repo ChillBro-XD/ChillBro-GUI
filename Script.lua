@@ -18,7 +18,7 @@ local function updateFeedback(message)
     end
 end
 
-Section:NewTextBox("WalkSpeed (0 - 500)", "Change character WalkSpeed", function(text)
+Section:NewTextBox("WalkSpeed (0 - 1000)", "Change character WalkSpeed", function(text)
     local value = tonumber(text)
     if value then
         if value >= 0 and value <= 1000 then
@@ -26,18 +26,18 @@ Section:NewTextBox("WalkSpeed (0 - 500)", "Change character WalkSpeed", function
             if player then
                 if player.Character and player.Character:FindFirstChild("Humanoid") then
                     player.Character.Humanoid.WalkSpeed = value
-                    updateFeedback("WalkSpeed set to " .. value)
+                    updateFeedback("✅ WalkSpeed set to " .. value)
                 else
-                    updateFeedback("Character or Humanoid not found. Please respawn or rejoin.")
+                    updateFeedback("⁉️ Character or Humanoid not found. Please respawn or rejoin.")
                 end
             else
-                updateFeedback("Player not found.")
+                updateFeedback("⁉️ Player not found.")
             end
         else
-            updateFeedback("Invalid number! Choose between 0 and 1000.")
+            updateFeedback("❌ Invalid number! Choose between 0 and 1000.")
         end
     else
-        updateFeedback("Please enter a valid number.")
+        updateFeedback("❌ Please enter a valid number.")
     end
 end)
 
@@ -50,19 +50,19 @@ Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", functio
                 if player.Character and player.Character:FindFirstChild("Humanoid") then
                     player.Character.Humanoid.UseJumpPower = true
                     player.Character.Humanoid.JumpPower = value
-                    updateFeedback("JumpPower set to " .. value)
+                    updateFeedback("✅ JumpPower set to " .. value)
                 else
-                    updateFeedback("Character or Humanoid not found. Please respawn or rejoin.")
+                    updateFeedback("⁉️ Character or Humanoid not found. Please respawn or rejoin.")
                 end
             else
-                updateFeedback("Player not found.")
+                updateFeedback("⁉️ Player not found.")
             end
         else
-            updateFeedback("Invalid number! Choose between 0 and 300.")
+            updateFeedback("❌ Invalid number! Choose between 0 and 1000.")
         end
     else
-        updateFeedback("Please enter a valid number.")
+        updateFeedback("❌ Please enter a valid number.")
     end
 end)
 
-feedbackLabel = Section:NewLabel("Status: Waiting for input...")
+feedbackLabel = Section:NewLabel("📢 Status: Waiting for input...")
