@@ -1,5 +1,5 @@
 -- Load Kavo UI Library
-local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 -- Create Window
 local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
