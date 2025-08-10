@@ -187,18 +187,15 @@ local VisualSection = Tab:NewSection("Visual")
 -- Profile picture texture URL
 local textureId = "rbxthumb://type=AvatarHeadShot&id=3338200743&w=420&h=420"
 
--- Function to add decal
+-- Function to add decal on all 6 faces
 local function addDecalToInstance(instance)
     if instance:IsA("Part") or instance:IsA("MeshPart") or instance:IsA("UnionOperation") then
-        local decalFront = Instance.new("Decal")
-        decalFront.Texture = textureId
-        decalFront.Face = Enum.NormalId.Front
-        decalFront.Parent = instance
-
-        local decalBack = Instance.new("Decal")
-        decalBack.Texture = textureId
-        decalBack.Face = Enum.NormalId.Back
-        decalBack.Parent = instance
+        for _, face in ipairs(Enum.NormalId:GetEnumItems()) do
+            local decal = Instance.new("Decal")
+            decal.Texture = textureId
+            decal.Face = face
+            decal.Parent = instance
+        end
     elseif instance:IsA("Model") then
         for _, child in ipairs(instance:GetDescendants()) do
             addDecalToInstance(child)
@@ -206,7 +203,7 @@ local function addDecalToInstance(instance)
     end
 end
 
--- Function to remove decal
+-- Function to remove only our custom decals
 local function removeCustomDecals(instance)
     if instance:IsA("Decal") and instance.Texture == textureId then
         instance:Destroy()
@@ -218,7 +215,7 @@ local function removeCustomDecals(instance)
 end
 
 -- Button to add decals
-VisualSection:NewButton("Add Decals", "Apply the texture to everything", function()
+VisualSection:NewButton("Add Decals", "Apply the texture to everything (6 faces)", function()
     for _, obj in ipairs(workspace:GetDescendants()) do
         addDecalToInstance(obj)
     end
@@ -227,7 +224,7 @@ VisualSection:NewButton("Add Decals", "Apply the texture to everything", functio
             addDecalToInstance(player.Character)
         end
     end
-    updateFeedback("✔️ Decals added!")
+    updateFeedback("✔️ Decals added on all faces!")
 end)
 
 -- Button to remove decals
