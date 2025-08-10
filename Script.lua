@@ -142,7 +142,7 @@ end)
 feedbackLabel = Section:NewLabel("Status: Waiting for input...")
 
 -- Nova aba: Special Guis
-local SpecialTab = Window:NewTab("Special Guis")
+local SpecialTab = Window:NewTab("Special scripts")
 local SpecialSection = SpecialTab:NewSection("Available GUIs")
 
 -- Botão para executar Infinite Yield
@@ -169,14 +169,14 @@ SpecialSection:NewButton("Mobile keyboard", "Idk the creator so i cant give cred
     end
 end)
 
--- Botão para executar Wally West FE
-SpecialSection:NewButton("Wally West FE", "Credits: @7x_pokics, @lockj, @BenereV2 And Gang", function()
+-- Botão para executar Quicky CMD
+SpecialSection:NewButton("Quicky CMD", "For games with not secured remotes", function()
     local success, err = pcall(function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/Unkn0wnKnown/Wally-West-FE/refs/heads/main/Wally%20West%20FE"))()
-    end)
+       loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
+            end)
     if success then
-        updateFeedback("✔️ Wally West FE loaded successfully!")
+        updateFeedback("✔️ Quicky CMD loaded successfully!")
     else
-        updateFeedback("✖ Failed to load Wally West FE: " .. tostring(err))
+        updateFeedback("✖ Failed to load Quicky CMD: " .. tostring(err))
     end
 end)
