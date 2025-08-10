@@ -146,7 +146,7 @@ local SpecialTab = Window:NewTab("Special Guis")
 local SpecialSection = SpecialTab:NewSection("Available GUIs")
 
 -- Botão para executar Kill GUI
-SpecialSection:NewButton("Kill GUI", "Need: TOOL", function()
+SpecialSection:NewButton("Kill GUI (Credits to CatbyteHD)", "Need: TOOL", function()
     local success, err = pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/Kill-GUI-V2.lua"))()
     end)
@@ -154,5 +154,17 @@ SpecialSection:NewButton("Kill GUI", "Need: TOOL", function()
         updateFeedback("✔️ Kill GUI loaded successfully!")
     else
         updateFeedback("✖ Failed to load Kill GUI: " .. tostring(err))
+    end
+end)
+
+-- Botão para executar Nameless Animations V4
+SpecialSection:NewButton("Nameless Animations V4", "Reanimation script by MyWorld", function()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/NamelessAnimationsV4.lua"))()
+    end)
+    if success then
+        updateFeedback("✔️ Nameless Animations V4 loaded successfully!")
+    else
+        updateFeedback("✖ Failed to load Nameless Animations V4: " .. tostring(err))
     end
 end)
