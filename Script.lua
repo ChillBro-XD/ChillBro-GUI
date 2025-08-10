@@ -1,6 +1,6 @@
--- Já tem isso antes
+-- CRIADO POR CHILLBRO_XD - LIBERADO PARA USO --
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRussell/Kavo-UI-Library/main/Movable.source.lua"))()
-local Window = Library.CreateLib("Comando's GUI", "BloodTheme")
+local Window = Library.CreateLib("ChillBro GUI", "BloodTheme")
 local Tab = Window:NewTab("Scripts")
 local Section = Tab:NewSection("Humanoid Controls")
 
@@ -58,8 +58,6 @@ Section:NewTextBox("JumpPower (0 - 1000)", "Change character JumpPower", functio
         updateFeedback("✖ Please enter a valid number.")
     end
 end)
-
--- NOVOS COMANDOS
 
 Section:NewTextBox("Health (1 - MaxHealth)", "Change current Health", function(text)
     local value = tonumber(text)
