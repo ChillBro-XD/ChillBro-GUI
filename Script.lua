@@ -145,26 +145,38 @@ feedbackLabel = Section:NewLabel("Status: Waiting for input...")
 local SpecialTab = Window:NewTab("Special Guis")
 local SpecialSection = SpecialTab:NewSection("Available GUIs")
 
--- Botão para executar Kill GUI
-SpecialSection:NewButton("Kill GUI (Credits to CatbyteHD)", "(DONT WORK IN EVERY GAME) Need: TOOL", function()
+-- Botão para executar Infinite Yield
+SpecialSection:NewButton("Infinite Yield", "Credits to Infinite Yield creators", function()
     local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/Kill-GUI-V2.lua"))()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
     end)
     if success then
-        updateFeedback("✔️ Kill GUI loaded successfully!")
+        updateFeedback("✔️ Infinite Yield loaded successfully!")
     else
-        updateFeedback("✖ Failed to load Kill GUI: " .. tostring(err))
+        updateFeedback("✖ Failed to load Infinite Yield: " .. tostring(err))
     end
 end)
 
--- Botão para executar Nameless Animations V4
-SpecialSection:NewButton("Nameless Animations V4", "Reanimation script by MyWorld", function()
+-- Botão para executar Mobile keyboard
+SpecialSection:NewButton("Mobile keyboard", "Idk the creator so i cant give credits", function()
     local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/NamelessAnimationsV4.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/MobileKeyboard.lua"))()
     end)
     if success then
-        updateFeedback("✔️ Nameless Animations V4 loaded successfully!")
+        updateFeedback("✔️ Mobile keyboard loaded successfully!")
     else
-        updateFeedback("✖ Failed to load Nameless Animations V4: " .. tostring(err))
+        updateFeedback("✖ Failed to load Mobile keyboard: " .. tostring(err))
+    end
+end)
+
+-- Botão para executar Wally West FE
+SpecialSection:NewButton("Wally West FE", "Credits: @7x_pokics, @lockj, @BenereV2 And Gang", function()
+    local success, err = pcall(function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/Unkn0wnKnown/Wally-West-FE/refs/heads/main/Wally%20West%20FE"))()
+    end)
+    if success then
+        updateFeedback("✔️ Wally West FE loaded successfully!")
+    else
+        updateFeedback("✖ Failed to load Wally West FE: " .. tostring(err))
     end
 end)
