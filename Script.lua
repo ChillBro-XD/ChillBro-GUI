@@ -146,7 +146,7 @@ local SpecialTab = Window:NewTab("Special Guis")
 local SpecialSection = SpecialTab:NewSection("Available GUIs")
 
 -- Botão para executar Kill GUI
-SpecialSection:NewButton("Kill GUI (Credits to CatbyteHD)", "Need: TOOL", function()
+SpecialSection:NewButton("Kill GUI (Credits to CatbyteHD)", "(DONT WORK IN EVERY GAME) Need: TOOL", function()
     local success, err = pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/Kill-GUI-V2.lua"))()
     end)
