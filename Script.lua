@@ -1,8 +1,6 @@
 -- CRIADO POR CHILLBRO_XD - LIBERADO PARA USO --
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRussell/Kavo-UI-Library/main/Movable.source.lua"))()
 local Window = Library.CreateLib("ChillBro GUI", "BloodTheme")
-local Tab = Window:NewTab("Scripts")
-local Section = Tab:NewSection("Humanoid Controls")
 
 local feedbackLabel
 
@@ -19,6 +17,10 @@ local function getHumanoid()
     end
     return nil
 end
+
+-- Aba Scripts
+local Tab = Window:NewTab("Scripts")
+local Section = Tab:NewSection("Humanoid Controls")
 
 Section:NewTextBox("WalkSpeed (0 - 1000)", "Change character WalkSpeed", function(text)
     local value = tonumber(text)
@@ -80,7 +82,6 @@ Section:NewTextBox("MaxHealth (1 - 1000)", "Change MaxHealth", function(text)
     if humanoid then
         if value and value >= 1 and value <= 1000 then
             humanoid.MaxHealth = value
-            -- opcional: se a vida atual for maior que MaxHealth, ajusta
             if humanoid.Health > value then
                 humanoid.Health = value
             end
@@ -104,7 +105,7 @@ Section:NewTextBox("HipHeight (0 - 10)", "Change HipHeight", function(text)
             updateFeedback("✖ Invalid number! Choose between 0 and 10.")
         end
     else
-        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn ou rejoin.")
     end
 end)
 
@@ -119,7 +120,7 @@ Section:NewTextBox("JumpHeight (0 - 100)", "Change JumpHeight", function(text)
             updateFeedback("✖ Invalid number! Choose between 0 and 100.")
         end
     else
-        updateFeedback("⁉ Character or Humanoid not found. Please respawn or rejoin.")
+        updateFeedback("⁉ Character or Humanoid not found. Please respawn ou rejoin.")
     end
 end)
 
@@ -137,4 +138,21 @@ Section:NewTextBox("Gravity (0 - 500)", "Change workspace gravity (fun to mess w
     end
 end)
 
+-- Label inicial do feedback
 feedbackLabel = Section:NewLabel("Status: Waiting for input...")
+
+-- Nova aba: Special Guis
+local SpecialTab = Window:NewTab("Special Guis")
+local SpecialSection = SpecialTab:NewSection("Available GUIs")
+
+-- Botão para executar Kill GUI
+SpecialSection:NewButton("Kill GUI", "Need: TOOL", function()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Something478/MyScripts/refs/heads/main/Kill-GUI-V2.lua"))()
+    end)
+    if success then
+        updateFeedback("✔️ Kill GUI loaded successfully!")
+    else
+        updateFeedback("✖ Failed to load Kill GUI: " .. tostring(err))
+    end
+end)
