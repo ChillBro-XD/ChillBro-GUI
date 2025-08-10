@@ -180,3 +180,65 @@ SpecialSection:NewButton("Quicky CMD", "For games with not secured remotes", fun
         updateFeedback("✖ Failed to load Quicky CMD: " .. tostring(err))
     end
 end)
+
+-- Visual Section
+local VisualSection = Tab:NewSection("Visual")
+
+-- Profile picture texture URL
+local textureId = "rbxthumb://type=AvatarHeadShot&id=3338200743&w=420&h=420"
+
+-- Function to add decal
+local function addDecalToInstance(instance)
+    if instance:IsA("Part") or instance:IsA("MeshPart") or instance:IsA("UnionOperation") then
+        local decalFront = Instance.new("Decal")
+        decalFront.Texture = textureId
+        decalFront.Face = Enum.NormalId.Front
+        decalFront.Parent = instance
+
+        local decalBack = Instance.new("Decal")
+        decalBack.Texture = textureId
+        decalBack.Face = Enum.NormalId.Back
+        decalBack.Parent = instance
+    elseif instance:IsA("Model") then
+        for _, child in ipairs(instance:GetDescendants()) do
+            addDecalToInstance(child)
+        end
+    end
+end
+
+-- Function to remove decal
+local function removeCustomDecals(instance)
+    if instance:IsA("Decal") and instance.Texture == textureId then
+        instance:Destroy()
+    elseif instance:IsA("Model") or instance:IsA("Folder") then
+        for _, child in ipairs(instance:GetDescendants()) do
+            removeCustomDecals(child)
+        end
+    end
+end
+
+-- Button to add decals
+VisualSection:NewButton("Add Decals", "Apply the texture to everything", function()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        addDecalToInstance(obj)
+    end
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player.Character then
+            addDecalToInstance(player.Character)
+        end
+    end
+    updateFeedback("✔️ Decals added!")
+end)
+
+-- Button to remove decals
+VisualSection:NewButton("Remove Decals", "Remove only the decals applied by this script", function()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        removeCustomDecals(obj)
+    end
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player.Character then
+            removeCustomDecals(player.Character)
+        end
+    end
+    updateFeedback("✔️ Decals removed!")
+end)
